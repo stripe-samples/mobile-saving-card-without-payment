@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		9E67283CCA7A2975C3143F79 /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C30262B94661528FEA1A06 /* Pods_app.framework */; };
-		C10C90F0233E7BF500EF03DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10C90EF233E7BF500EF03DC /* AppDelegate.swift */; };
+		B60E403B2343F61800D43E47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60E403A2343F61800D43E47 /* AppDelegate.swift */; };
+		B60E403D2343F62600D43E47 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60E403C2343F62600D43E47 /* CheckoutViewController.swift */; };
 		C10C90F6233E7BF700EF03DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C10C90F5233E7BF700EF03DC /* Assets.xcassets */; };
 		C10C90FC233E7BF700EF03DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C10C90FA233E7BF700EF03DC /* LaunchScreen.storyboard */; };
-		C1E58635233E7DF9002A0F68 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E58634233E7DF9002A0F68 /* CheckoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C3505B463127DC59B3B4852 /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
 		44C30262B94661528FEA1A06 /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550E7E71D6E51D5AF4A2548D /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
+		B60E403A2343F61800D43E47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B60E403C2343F62600D43E47 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		C10C90EC233E7BF500EF03DC /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C10C90EF233E7BF500EF03DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C10C90F5233E7BF700EF03DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C10C90FB233E7BF700EF03DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C10C90FD233E7BF700EF03DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1E58634233E7DF9002A0F68 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +76,8 @@
 		C10C90EE233E7BF500EF03DC /* app */ = {
 			isa = PBXGroup;
 			children = (
-				C10C90EF233E7BF500EF03DC /* AppDelegate.swift */,
-				C1E58634233E7DF9002A0F68 /* CheckoutViewController.swift */,
+				B60E403A2343F61800D43E47 /* AppDelegate.swift */,
+				B60E403C2343F62600D43E47 /* CheckoutViewController.swift */,
 				C10C90F5233E7BF700EF03DC /* Assets.xcassets */,
 				C10C90FA233E7BF700EF03DC /* LaunchScreen.storyboard */,
 				C10C90FD233E7BF700EF03DC /* Info.plist */,
@@ -199,8 +199,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1E58635233E7DF9002A0F68 /* CheckoutViewController.swift in Sources */,
-				C10C90F0233E7BF500EF03DC /* AppDelegate.swift in Sources */,
+				B60E403B2343F61800D43E47 /* AppDelegate.swift in Sources */,
+				B60E403D2343F62600D43E47 /* CheckoutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

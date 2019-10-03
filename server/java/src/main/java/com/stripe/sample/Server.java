@@ -28,6 +28,16 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Server {
     private static Gson gson = new Gson();
 
+    static class CreatePaymentResponse {
+        private String publishableKey;
+        private String clientSecret;
+
+        public CreatePaymentResponse(String publishableKey, String clientSecret) {
+            this.publishableKey = publishableKey;
+            this.clientSecret = clientSecret;
+        }
+    }
+    
     public static void main(String[] args) {
         port(4242);
         String ENV_PATH = "../../";
@@ -38,20 +48,14 @@ public class Server {
         staticFiles.externalLocation(
                 Paths.get(Paths.get("").toAbsolutePath().toString(), dotenv.get("STATIC_DIR")).normalize().toString());
 
-        get("/public-key", (request, response) -> {
-            response.type("application/json");
-            JsonObject publicKey = new JsonObject();
-            publicKey.addProperty("publicKey", dotenv.get("STRIPE_PUBLIC_KEY"));
-            return publicKey.toString();
-        });
-
         post("/create-setup-intent", (request, response) -> {
             response.type("application/json");
 
             Map<String, Object> params = new HashMap<>();
             SetupIntent setupIntent = SetupIntent.create(params);
 
-            return gson.toJson(setupIntent);
+            // Send publishable key and SetupIntent details to client
+            return gson.toJson(new CreatePaymentResponse(dotenv.get("STRIPE_PUBLISHABLE_KEY"), setupIntent.getClientSecret()));
         });
 
         post("/webhook", (request, response) -> {

@@ -28,16 +28,11 @@ app = Flask(__name__, static_folder=static_dir,
 def get_setup_intent_page():
     return render_template('index.html')
 
-
-@app.route('/public-key', methods=['GET'])
-def get_public_key():
-    return jsonify(publicKey=os.getenv('STRIPE_PUBLIC_KEY'))
-
-
 @app.route('/create-setup-intent', methods=['POST'])
 def create_setup_intent():
     setup_intent = stripe.SetupIntent.create()
-    return jsonify(setup_intent)
+    # Send publishable key and SetupIntent details to client
+    return jsonify({'publishableKey': os.getenv('STRIPE_PUBLISHABLE_KEY'), 'clientSecret': setup_intent.client_secret})
 
 
 @app.route('/webhook', methods=['POST'])

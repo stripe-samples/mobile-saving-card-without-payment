@@ -30,12 +30,15 @@ app.get("/", (req, res) => {
   res.sendFile(path);
 });
 
-app.get("/public-key", (req, res) => {
-  res.send({ publicKey: process.env.STRIPE_PUBLIC_KEY });
-});
-
 app.post("/create-setup-intent", async (req, res) => {
-  res.send(await stripe.setupIntents.create());
+  const setupIntent = await stripe.setupIntents.create();
+
+  // Send publishable key and SetupIntent details to client
+  res.send({
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    clientSecret: setupIntent.client_secret
+  });
+
 });
 
 // Webhook handler for asynchronous events.

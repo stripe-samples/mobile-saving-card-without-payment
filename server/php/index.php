@@ -34,19 +34,15 @@ $app->get('/', function (Request $request, Response $response, array $args) {
   return $response->write(file_get_contents(getenv('STATIC_DIR') . '/index.html'));
 });
 
-$app->get('/public-key', function (Request $request, Response $response, array $args) {
-  $pub_key = getenv('STRIPE_PUBLIC_KEY');
-  
-  // Send public key details to client
-  return $response->withJson(array('publicKey' => $pub_key));
-});
-
 $app->post('/create-setup-intent', function (Request $request, Response $response, array $args) {  
+    $logger = $this->get('logger');
+    $logger->info('A new SetupIntent was created. ');
+    $publishableKey = getenv('STRIPE_PUBLISHABLE_KEY');
     $setupIntent = \Stripe\SetupIntent::create();
-    // Send Setup Intent details to client
-    return $response->withJson($setupIntent);
-});
 
+    // Send publishable key and SetupIntent details to client
+    return $response->withJson(array('publishableKey' => $publishableKey, 'clientSecret' => $setupIntent->client_secret));
+});
 
 $app->post('/webhook', function(Request $request, Response $response) {
     $logger = $this->get('logger');
