@@ -90,8 +90,8 @@ class CheckoutViewController: UIViewController {
                     self?.displayAlert(title: "Error loading page", message: message)
                     return
             }
-            print("Created SetupIntent")
             self?.setupIntentClientSecret = clientSecret
+            // Configure the SDK with your Stripe publishable key so that it can make requests to the Stripe API
             Stripe.setDefaultPublishableKey(stripePublishableKey)
         })
         task.resume()
