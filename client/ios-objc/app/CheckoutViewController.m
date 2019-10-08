@@ -83,9 +83,9 @@ NSString *const BackendUrl = @"http://127.0.0.1:4242/";
             });
         }
         else {
-            NSLog(@"Created Setupintent");
             self.setupIntentClientSecret = json[@"clientSecret"];
             NSString *stripePublishableKey = json[@"publishableKey"];
+            // Configure the SDK with your Stripe publishable key so that it can make requests to the Stripe API
             [Stripe setDefaultPublishableKey:stripePublishableKey];
         }
     }];
