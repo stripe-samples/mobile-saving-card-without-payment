@@ -23,7 +23,7 @@ cp .env.example .env
 You will need a Stripe account in order to run the demo. Once you set up your account, go to the Stripe [developer dashboard](https://stripe.com/docs/development#api-keys) to find your API keys.
 
 ```
-STRIPE_PUBLIC_KEY=<replace-with-your-publishable-key>
+STRIPE_PUBLISHABLE_KEY=<replace-with-your-publishable-key>
 STRIPE_SECRET_KEY=<replace-with-your-secret-key>
 ```
 
