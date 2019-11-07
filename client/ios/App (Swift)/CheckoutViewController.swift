@@ -40,11 +40,23 @@ class CheckoutViewController: UIViewController {
         emailTextField.borderStyle = .roundedRect
         return emailTextField
     }()
+    lazy var mandateLabel: UILabel = {
+        let mandateLabel = UILabel()
+        // Collect permission to reuse the customer's card:
+        // In your app, add terms on how you plan to process payments and
+        // reference the terms of the payment in the checkout flow
+        // See https://stripe.com/docs/strong-customer-authentication/faqs#mandates
+        mandateLabel.text = "I authorise Stripe Samples to send instructions to the financial institution that issued my card to take payments from my card account in accordance with the terms of my agreement with you."
+        mandateLabel.numberOfLines = 0
+        mandateLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        mandateLabel.textColor = .systemGray
+        return mandateLabel
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        let stackView = UIStackView(arrangedSubviews: [emailTextField, cardTextField, payButton])
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, cardTextField, payButton, mandateLabel])
         stackView.axis = .vertical
         stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false

@@ -2,7 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:app.xcodeproj">
+      location = "group:Save Card Without Payment (Swift).xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Save Card Without Payment (ObjC).xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -7,27 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E67283CCA7A2975C3143F79 /* Pods_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C30262B94661528FEA1A06 /* Pods_app.framework */; };
+		B60E403B2343F61800D43E47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60E403A2343F61800D43E47 /* AppDelegate.swift */; };
+		B60E403D2343F62600D43E47 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60E403C2343F62600D43E47 /* CheckoutViewController.swift */; };
+		BF2628C27708FBFCFBDA0A93 /* Pods_Save_Card_Without_Payment__Swift_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBDDA8DF92B9E53F990B0083 /* Pods_Save_Card_Without_Payment__Swift_.framework */; };
 		C10C90F6233E7BF700EF03DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C10C90F5233E7BF700EF03DC /* Assets.xcassets */; };
 		C10C90FC233E7BF700EF03DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C10C90FA233E7BF700EF03DC /* LaunchScreen.storyboard */; };
-		C1D7F669233E8E410063244F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D7F668233E8E410063244F /* main.m */; };
-		C1D7F66E233E8F310063244F /* CheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D7F66C233E8F310063244F /* CheckoutViewController.m */; };
-		C1D7F66F233E8F310063244F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D7F66D233E8F310063244F /* AppDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C3505B463127DC59B3B4852 /* Pods-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.release.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.release.xcconfig"; sourceTree = "<group>"; };
-		44C30262B94661528FEA1A06 /* Pods_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550E7E71D6E51D5AF4A2548D /* Pods-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-app.debug.xcconfig"; path = "Target Support Files/Pods-app/Pods-app.debug.xcconfig"; sourceTree = "<group>"; };
-		C10C90EC233E7BF500EF03DC /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60852F1D6DB25B4CDA4DC6D6 /* Pods-Save Card Without Payment (Swift).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Save Card Without Payment (Swift).release.xcconfig"; path = "Target Support Files/Pods-Save Card Without Payment (Swift)/Pods-Save Card Without Payment (Swift).release.xcconfig"; sourceTree = "<group>"; };
+		B60E403A2343F61800D43E47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B60E403C2343F62600D43E47 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		BC1ACDB9ADD10CB999BBD70A /* Pods-Save Card Without Payment (Swift).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Save Card Without Payment (Swift).debug.xcconfig"; path = "Target Support Files/Pods-Save Card Without Payment (Swift)/Pods-Save Card Without Payment (Swift).debug.xcconfig"; sourceTree = "<group>"; };
+		C10C90EC233E7BF500EF03DC /* Save Card Without Payment (Swift).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Save Card Without Payment (Swift).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C10C90F5233E7BF700EF03DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C10C90FB233E7BF700EF03DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C10C90FD233E7BF700EF03DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1D7F668233E8E410063244F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C1D7F66A233E8F300063244F /* CheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckoutViewController.h; sourceTree = "<group>"; };
-		C1D7F66B233E8F300063244F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C1D7F66C233E8F310063244F /* CheckoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckoutViewController.m; sourceTree = "<group>"; };
-		C1D7F66D233E8F310063244F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FBDDA8DF92B9E53F990B0083 /* Pods_Save_Card_Without_Payment__Swift_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Save_Card_Without_Payment__Swift_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E67283CCA7A2975C3143F79 /* Pods_app.framework in Frameworks */,
+				BF2628C27708FBFCFBDA0A93 /* Pods_Save_Card_Without_Payment__Swift_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +45,8 @@
 			children = (
 				550E7E71D6E51D5AF4A2548D /* Pods-app.debug.xcconfig */,
 				2C3505B463127DC59B3B4852 /* Pods-app.release.xcconfig */,
+				BC1ACDB9ADD10CB999BBD70A /* Pods-Save Card Without Payment (Swift).debug.xcconfig */,
+				60852F1D6DB25B4CDA4DC6D6 /* Pods-Save Card Without Payment (Swift).release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -54,7 +54,7 @@
 		7582CE742CF0E6C729A60C26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				44C30262B94661528FEA1A06 /* Pods_app.framework */,
+				FBDDA8DF92B9E53F990B0083 /* Pods_Save_Card_Without_Payment__Swift_.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -62,7 +62,7 @@
 		C10C90E3233E7BF500EF03DC = {
 			isa = PBXGroup;
 			children = (
-				C10C90EE233E7BF500EF03DC /* app */,
+				C10C90EE233E7BF500EF03DC /* App (Swift) */,
 				C10C90ED233E7BF500EF03DC /* Products */,
 				1B29572E725B0C3B2DE0730B /* Pods */,
 				7582CE742CF0E6C729A60C26 /* Frameworks */,
@@ -72,32 +72,29 @@
 		C10C90ED233E7BF500EF03DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C10C90EC233E7BF500EF03DC /* app.app */,
+				C10C90EC233E7BF500EF03DC /* Save Card Without Payment (Swift).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C10C90EE233E7BF500EF03DC /* app */ = {
+		C10C90EE233E7BF500EF03DC /* App (Swift) */ = {
 			isa = PBXGroup;
 			children = (
-				C1D7F66A233E8F300063244F /* CheckoutViewController.h */,
-				C1D7F66C233E8F310063244F /* CheckoutViewController.m */,
-				C1D7F66B233E8F300063244F /* AppDelegate.h */,
-				C1D7F66D233E8F310063244F /* AppDelegate.m */,
-				C1D7F668233E8E410063244F /* main.m */,
+				B60E403A2343F61800D43E47 /* AppDelegate.swift */,
+				B60E403C2343F62600D43E47 /* CheckoutViewController.swift */,
 				C10C90F5233E7BF700EF03DC /* Assets.xcassets */,
 				C10C90FA233E7BF700EF03DC /* LaunchScreen.storyboard */,
 				C10C90FD233E7BF700EF03DC /* Info.plist */,
 			);
-			path = app;
+			path = "App (Swift)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C10C90EB233E7BF500EF03DC /* app */ = {
+		C10C90EB233E7BF500EF03DC /* Save Card Without Payment (Swift) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C10C9100233E7BF700EF03DC /* Build configuration list for PBXNativeTarget "app" */;
+			buildConfigurationList = C10C9100233E7BF700EF03DC /* Build configuration list for PBXNativeTarget "Save Card Without Payment (Swift)" */;
 			buildPhases = (
 				55C9FD774817BD1AAC7DA1AA /* [CP] Check Pods Manifest.lock */,
 				C10C90E8233E7BF500EF03DC /* Sources */,
@@ -109,9 +106,9 @@
 			);
 			dependencies = (
 			);
-			name = app;
+			name = "Save Card Without Payment (Swift)";
 			productName = app;
-			productReference = C10C90EC233E7BF500EF03DC /* app.app */;
+			productReference = C10C90EC233E7BF500EF03DC /* Save Card Without Payment (Swift).app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -126,11 +123,10 @@
 				TargetAttributes = {
 					C10C90EB233E7BF500EF03DC = {
 						CreatedOnToolsVersion = 11.0;
-						LastSwiftMigration = 1100;
 					};
 				};
 			};
-			buildConfigurationList = C10C90E7233E7BF500EF03DC /* Build configuration list for PBXProject "app" */;
+			buildConfigurationList = C10C90E7233E7BF500EF03DC /* Build configuration list for PBXProject "Save Card Without Payment (Swift)" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -143,7 +139,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C10C90EB233E7BF500EF03DC /* app */,
+				C10C90EB233E7BF500EF03DC /* Save Card Without Payment (Swift) */,
 			);
 		};
 /* End PBXProject section */
@@ -176,7 +172,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-app-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Save Card Without Payment (Swift)-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -189,15 +185,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Save Card Without Payment (Swift)/Pods-Save Card Without Payment (Swift)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Save Card Without Payment (Swift)/Pods-Save Card Without Payment (Swift)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-app/Pods-app-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Save Card Without Payment (Swift)/Pods-Save Card Without Payment (Swift)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -207,9 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1D7F66E233E8F310063244F /* CheckoutViewController.m in Sources */,
-				C1D7F669233E8E410063244F /* main.m in Sources */,
-				C1D7F66F233E8F310063244F /* AppDelegate.m in Sources */,
+				B60E403B2343F61800D43E47 /* AppDelegate.swift in Sources */,
+				B60E403D2343F62600D43E47 /* CheckoutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,20 +338,18 @@
 		};
 		C10C9101233E7BF700EF03DC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 550E7E71D6E51D5AF4A2548D /* Pods-app.debug.xcconfig */;
+			baseConfigurationReference = BC1ACDB9ADD10CB999BBD70A /* Pods-Save Card Without Payment (Swift).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = "App (Swift)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "stripe-samples.app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,13 +357,12 @@
 		};
 		C10C9102233E7BF700EF03DC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C3505B463127DC59B3B4852 /* Pods-app.release.xcconfig */;
+			baseConfigurationReference = 60852F1D6DB25B4CDA4DC6D6 /* Pods-Save Card Without Payment (Swift).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = app/Info.plist;
+				INFOPLIST_FILE = "App (Swift)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -385,7 +377,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C10C90E7233E7BF500EF03DC /* Build configuration list for PBXProject "app" */ = {
+		C10C90E7233E7BF500EF03DC /* Build configuration list for PBXProject "Save Card Without Payment (Swift)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C10C90FE233E7BF700EF03DC /* Debug */,
@@ -394,7 +386,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C10C9100233E7BF700EF03DC /* Build configuration list for PBXNativeTarget "app" */ = {
+		C10C9100233E7BF700EF03DC /* Build configuration list for PBXNativeTarget "Save Card Without Payment (Swift)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C10C9101233E7BF700EF03DC /* Debug */,

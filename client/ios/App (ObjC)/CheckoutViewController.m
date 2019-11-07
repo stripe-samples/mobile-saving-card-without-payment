@@ -48,8 +48,18 @@ NSString *const BackendUrl = @"http://127.0.0.1:4242/";
     [button setTitle:@"Save" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
     self.payButton = button;
-
-    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[emailTextField, cardTextField, button]];
+    
+    UILabel *mandateLabel = [UILabel new];
+    // Collect permission to reuse the customer's card:
+    // In your app, add terms on how you plan to process payments and
+    // reference the terms of the payment in the checkout flow
+    // See https://stripe.com/docs/strong-customer-authentication/faqs#mandates
+    mandateLabel.text = @"I authorise Stripe Samples to send instructions to the financial institution that issued my card to take payments from my card account in accordance with the terms of my agreement with you.";
+    mandateLabel.numberOfLines = 0;
+    mandateLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    mandateLabel.textColor = UIColor.systemGrayColor;
+    
+    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[emailTextField, cardTextField, button, mandateLabel]];
     stackView.axis = UILayoutConstraintAxisVertical;
     stackView.translatesAutoresizingMaskIntoConstraints = NO;
     stackView.spacing = 20;
