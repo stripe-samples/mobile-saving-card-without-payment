@@ -30,7 +30,7 @@ import com.stripe.android.model.StripeIntent
 import com.stripe.android.view.CardInputWidget
 
 
-class CheckoutActivity : AppCompatActivity() {
+class CheckoutActivityKotlin : AppCompatActivity() {
 
     /**
      * To run this app, you'll need to first run the sample server locally.

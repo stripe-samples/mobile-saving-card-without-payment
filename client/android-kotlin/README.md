@@ -1,4 +1,4 @@
-# Android (Kotlin) Client
+# Android (Kotlin, Java) Client
 
 To run this app, you'll need to first run the sample server locally.
 Follow the "How to run locally" instructions in the root directory's README.md to get started.

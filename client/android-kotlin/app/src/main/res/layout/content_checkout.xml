@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_checkout"
-        tools:context=".CheckoutActivity">
+        tools:context=".CheckoutActivityKotlin">
 
     <EditText
         android:id="@+id/emailInput"
@@ -39,5 +39,23 @@
             app:layout_constraintTop_toBottomOf="@+id/cardInputWidget"
             app:layout_constraintStart_toStartOf="@+id/cardInputWidget"
             app:layout_constraintEnd_toEndOf="@+id/cardInputWidget"/>
+
+    <!--
+    Collect permission to reuse the customer's card:
+      In your app, add terms on how you plan to process payments
+      and reference the terms of the payment in the checkout flow
+    See https://stripe.com/docs/strong-customer-authentication/faqs#mandates
+    -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I authorise Stripe Samples to send instructions to the financial institution that issued my card to take payments from my card account in accordance with the terms of my agreement with you."
+
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/payButton"
+        app:layout_constraintStart_toStartOf="@+id/payButton"
+        app:layout_constraintEnd_toEndOf="@+id/payButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
