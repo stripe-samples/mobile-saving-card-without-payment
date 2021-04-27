@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -23,11 +24,13 @@ import org.json.JSONObject
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.SetupIntentResult
 import com.stripe.android.Stripe
+import com.stripe.android.getSetupIntentResult
 import com.stripe.android.model.ConfirmSetupIntentParams
 import com.stripe.android.model.PaymentMethod
 import com.stripe.android.model.PaymentMethodCreateParams
 import com.stripe.android.model.StripeIntent
 import com.stripe.android.view.CardInputWidget
+import kotlinx.coroutines.launch
 
 
 class CheckoutActivityKotlin : AppCompatActivity() {
@@ -119,14 +122,14 @@ class CheckoutActivityKotlin : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         val weakActivity = WeakReference<Activity>(this)
 
-        // Handle the result of stripe.confirmSetupIntent
-        stripe.onSetupResult(requestCode, data, object : ApiResultCallback<SetupIntentResult> {
-            override fun onSuccess(result: SetupIntentResult) {
-                val setupIntent = result.intent
-                val status = setupIntent.status
-                if (status == StripeIntent.Status.Succeeded) {
-                    // Setup completed successfully
-                    runOnUiThread {
+        if (stripe.isSetupResult(requestCode, data)) {
+            lifecycleScope.launch {
+                try {
+                    val result = stripe.getSetupIntentResult(requestCode, data!!)
+                    val setupIntent = result.intent
+                    val status = setupIntent.status
+                    if (status == StripeIntent.Status.Succeeded) {
+                        // Setup completed successfully
                         if (weakActivity.get() != null) {
                             val activity = weakActivity.get()!!
                             val builder = AlertDialog.Builder(activity)
@@ -144,10 +147,8 @@ class CheckoutActivityKotlin : AppCompatActivity() {
                             val dialog = builder.create()
                             dialog.show()
                         }
-                    }
-                } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
-                    // Setup failed – allow retrying using a different payment method
-                    runOnUiThread {
+                    } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
+                        // Setup failed – allow retrying using a different payment method
                         if (weakActivity.get() != null) {
                             val activity = weakActivity.get()!!
                             val builder = AlertDialog.Builder(activity)
@@ -164,12 +165,8 @@ class CheckoutActivityKotlin : AppCompatActivity() {
                             dialog.show()
                         }
                     }
-                }
-            }
-
-            override fun onError(e: Exception) {
-                // Setup request failed – allow retrying using the same payment method
-                runOnUiThread {
+                } catch (e: Exception) {
+                    // Setup request failed – allow retrying using the same payment method
                     if (weakActivity.get() != null) {
                         val activity = weakActivity.get()!!
                         val builder = AlertDialog.Builder(activity)
@@ -180,7 +177,70 @@ class CheckoutActivityKotlin : AppCompatActivity() {
                     }
                 }
             }
-        })
+        }
+
+//        // Handle the result of stripe.confirmSetupIntent
+//        stripe.onSetupResult(requestCode, data, object : ApiResultCallback<SetupIntentResult> {
+//            override fun onSuccess(result: SetupIntentResult) {
+//                val setupIntent = result.intent
+//                val status = setupIntent.status
+//                if (status == StripeIntent.Status.Succeeded) {
+//                    // Setup completed successfully
+//                    runOnUiThread {
+//                        if (weakActivity.get() != null) {
+//                            val activity = weakActivity.get()!!
+//                            val builder = AlertDialog.Builder(activity)
+//                            builder.setTitle("Setup completed")
+//                            val gson = GsonBuilder().setPrettyPrinting().create()
+//                            builder.setMessage(gson.toJson(setupIntent))
+//                            builder.setPositiveButton("Restart demo") { _, _ ->
+//                                val cardInputWidget =
+//                                    findViewById<CardInputWidget>(R.id.cardInputWidget)
+//                                cardInputWidget.clear()
+//                                val emailInput = findViewById<EditText>(R.id.emailInput)
+//                                emailInput.text = null
+//                                loadPage()
+//                            }
+//                            val dialog = builder.create()
+//                            dialog.show()
+//                        }
+//                    }
+//                } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
+//                    // Setup failed – allow retrying using a different payment method
+//                    runOnUiThread {
+//                        if (weakActivity.get() != null) {
+//                            val activity = weakActivity.get()!!
+//                            val builder = AlertDialog.Builder(activity)
+//                            builder.setTitle("Setup failed")
+//                            builder.setMessage(setupIntent.lastSetupError!!.message)
+//                            builder.setPositiveButton("Ok") { _, _ ->
+//                                val cardInputWidget =
+//                                    findViewById<CardInputWidget>(R.id.cardInputWidget)
+//                                cardInputWidget.clear()
+//                                val emailInput = findViewById<EditText>(R.id.emailInput)
+//                                emailInput.text = null
+//                            }
+//                            val dialog = builder.create()
+//                            dialog.show()
+//                        }
+//                    }
+//                }
+//            }
+//
+//            override fun onError(e: Exception) {
+//                // Setup request failed – allow retrying using the same payment method
+//                runOnUiThread {
+//                    if (weakActivity.get() != null) {
+//                        val activity = weakActivity.get()!!
+//                        val builder = AlertDialog.Builder(activity)
+//                        builder.setMessage(e.toString())
+//                        builder.setPositiveButton("Ok", null)
+//                        val dialog = builder.create()
+//                        dialog.show()
+//                    }
+//                }
+//            }
+//        })
     }
 
 }
