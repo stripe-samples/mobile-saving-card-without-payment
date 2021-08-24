@@ -164,7 +164,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
                         if (activity != null) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                             builder.setTitle("Setup failed");
-                            builder.setMessage(setupIntent.getLastSetupError().message);
+                            builder.setMessage(setupIntent.getLastSetupError().getMessage());
                             builder.setPositiveButton("Ok", (DialogInterface dialog, int index) -> {
                                 CardInputWidget cardInputWidget = findViewById(R.id.cardInputWidget);
                                 cardInputWidget.clear();
