@@ -59,28 +59,27 @@ class LauncherActivity : AppCompatActivity() {
             .post(body)
             .build()
 
-        httpClient.newCall(request)
-            .enqueue(object: Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    displayAlert("Failed to load page", "Error: $e")
-                }
+        httpClient.newCall(request).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                displayAlert("Failed to load page", "Error: $e")
+            }
 
-                override fun onResponse(call: Call, response: Response) {
-                    if (!response.isSuccessful) {
-                        displayAlert("Failed to load page", "Error: $response"
-                        )
-                    } else {
-                        val responseData = response.body?.string()
-                        val responseJson =
-                            responseData?.let { JSONObject(it) } ?: JSONObject()
-                        // For added security, our sample app gets the publishable key
-                        // from the server.
-                        publishableKey = responseJson.getString("publishableKey")
+            override fun onResponse(call: Call, response: Response) {
+                if (!response.isSuccessful) {
+                    displayAlert("Failed to load page", "Error: $response"
+                    )
+                } else {
+                    val responseData = response.body?.string()
+                    val responseJson =
+                        responseData?.let { JSONObject(it) } ?: JSONObject()
+                    // For added security, our sample app gets the publishable key
+                    // from the server.
+                    publishableKey = responseJson.getString("publishableKey")
 
-                        // Set up PaymentConfiguration with your Stripe publishable key
-                        PaymentConfiguration.init(applicationContext, publishableKey)
-                    }
+                    // Set up PaymentConfiguration with your Stripe publishable key
+                    PaymentConfiguration.init(applicationContext, publishableKey)
                 }
-            })
+            }
+        })
     }
 }
