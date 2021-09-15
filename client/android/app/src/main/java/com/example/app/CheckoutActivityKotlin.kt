@@ -1,7 +1,5 @@
 package com.example.app
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -9,13 +7,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.GsonBuilder
-import com.stripe.android.Stripe
-import com.stripe.android.getSetupIntentResult
+import com.stripe.android.PaymentConfiguration
 import com.stripe.android.model.ConfirmSetupIntentParams
 import com.stripe.android.model.PaymentMethod
 import com.stripe.android.model.PaymentMethodCreateParams
-import com.stripe.android.model.StripeIntent
+import com.stripe.android.payments.paymentlauncher.PaymentLauncher
+import com.stripe.android.payments.paymentlauncher.PaymentResult
 import com.stripe.android.view.CardInputWidget
 import kotlinx.coroutines.launch
 import okhttp3.*
@@ -23,7 +20,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
-import java.lang.ref.WeakReference
 
 
 class CheckoutActivityKotlin : AppCompatActivity() {
@@ -40,11 +36,19 @@ class CheckoutActivityKotlin : AppCompatActivity() {
     private val backendUrl = "http://10.0.2.2:4242/"
     private val httpClient = OkHttpClient()
     private lateinit var setupIntentClientSecret: String
-    private lateinit var stripe: Stripe
+
+    private lateinit var paymentLauncher: PaymentLauncher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
+        val paymentConfiguration = PaymentConfiguration.getInstance(applicationContext)
+        paymentLauncher = PaymentLauncher.Companion.create(
+            this,
+            paymentConfiguration.publishableKey,
+            paymentConfiguration.stripeAccountId,
+            ::onPaymentResult
+        )
         loadPage()
     }
 
@@ -56,30 +60,24 @@ class CheckoutActivityKotlin : AppCompatActivity() {
             .url(backendUrl + "create-setup-intent")
             .post(body)
             .build()
+
         httpClient.newCall(request)
             .enqueue(object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     runOnUiThread {
-                        Toast.makeText(applicationContext, "Error: $e", Toast.LENGTH_LONG).show()
+                        displayAlert("Error", e.toString(), true)
                     }
                 }
 
                 override fun onResponse(call: Call, response: Response) {
                     if (!response.isSuccessful) {
                         runOnUiThread {
-                            Toast.makeText(applicationContext, "Error: $response", Toast.LENGTH_LONG).show()
+                            displayAlert("Error", response.toString(), true)
                         }
                     } else {
                         val responseData = response.body?.string()
                         val json = JSONObject(responseData)
-
-                        // The response from the server includes the Stripe publishable key and
-                        // SetupIntent details.
-                        val stripePublishableKey = json.getString("publishableKey")
                         setupIntentClientSecret = json.getString("clientSecret")
-
-                        // Use the publishable key from the server to initialize the Stripe instance.
-                        stripe = Stripe(applicationContext, stripePublishableKey)
                     }
                 }
             })
@@ -105,75 +103,57 @@ class CheckoutActivityKotlin : AppCompatActivity() {
                     .create(paymentMethodCard, billingDetails, null)
                 val confirmParams = ConfirmSetupIntentParams
                     .create(paymentMethodParams, setupIntentClientSecret)
-                stripe.confirmSetupIntent(this, confirmParams)
+                lifecycleScope.launch {
+                    paymentLauncher.confirm(confirmParams)
+                }
             }
         }
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        val weakActivity = WeakReference<Activity>(this)
-
-        if (stripe.isSetupResult(requestCode, data)) {
-            lifecycleScope.launch {
-                runCatching {
-                    stripe.getSetupIntentResult(requestCode, data!!)
-                }.fold(
-                    onSuccess = { result->
-                        val setupIntent = result.intent
-                        val status = setupIntent.status
-                        if (status == StripeIntent.Status.Succeeded) {
-                            // Setup completed successfully
-                            if (weakActivity.get() != null) {
-                                val activity = weakActivity.get()!!
-                                val builder = AlertDialog.Builder(activity)
-                                builder.setTitle("Setup completed")
-                                val gson = GsonBuilder().setPrettyPrinting().create()
-                                builder.setMessage(gson.toJson(setupIntent))
-                                builder.setPositiveButton("Restart demo") { _, _ ->
-                                    val cardInputWidget =
-                                        findViewById<CardInputWidget>(R.id.cardInputWidget)
-                                    cardInputWidget.clear()
-                                    val emailInput = findViewById<EditText>(R.id.emailInput)
-                                    emailInput.text = null
-                                    loadPage()
-                                }
-                                val dialog = builder.create()
-                                dialog.show()
-                            }
-                        } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
-                            // Setup failed – allow retrying using a different payment method
-                            if (weakActivity.get() != null) {
-                                val activity = weakActivity.get()!!
-                                val builder = AlertDialog.Builder(activity)
-                                builder.setTitle("Setup failed")
-                                builder.setMessage(setupIntent.lastSetupError!!.message)
-                                builder.setPositiveButton("Ok") { _, _ ->
-                                    val cardInputWidget =
-                                        findViewById<CardInputWidget>(R.id.cardInputWidget)
-                                    cardInputWidget.clear()
-                                    val emailInput = findViewById<EditText>(R.id.emailInput)
-                                    emailInput.text = null
-                                }
-                                val dialog = builder.create()
-                                dialog.show()
-                            }
-                        }
-                    },
-                    onFailure = {
-                        // Setup request failed – allow retrying using the same payment method
-                        if (weakActivity.get() != null) {
-                            val activity = weakActivity.get()!!
-                            val builder = AlertDialog.Builder(activity)
-                            builder.setMessage(it.toString())
-                            builder.setPositiveButton("Ok", null)
-                            val dialog = builder.create()
-                            dialog.show()
-                        }
-                    }
-                )
+    private fun onPaymentResult(paymentResult: PaymentResult) {
+        var title = ""
+        var message = ""
+        var restartDemo = false
+        when (paymentResult) {
+            is PaymentResult.Completed -> {
+                title = "Setup Completed"
+                restartDemo = true
             }
+            is PaymentResult.Canceled -> {
+                title = "Setup Canceled"
+            }
+            is PaymentResult.Failed -> {
+                title = "Setup Failed"
+                message = paymentResult.throwable.message!!
+            }
+        }
+        displayAlert(title, message, restartDemo)
+    }
+
+    private fun displayAlert(
+        title: String,
+        message: String,
+        restartDemo: Boolean = false
+    ) {
+        runOnUiThread {
+            val cardInputWidget =
+                findViewById<CardInputWidget>(R.id.cardInputWidget)
+            val builder = AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+            if (restartDemo) {
+                builder.setPositiveButton("Restart demo") { _, _ ->
+                    cardInputWidget.clear()
+                    loadPage()
+                }
+            }
+            else {
+                builder.setPositiveButton("Ok", null)
+            }
+            builder
+                .create()
+                .show()
         }
     }
 }
