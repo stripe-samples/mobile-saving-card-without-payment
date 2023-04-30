@@ -5,14 +5,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
+    buildToolsVersion '31.0.0'
+    ndkVersion '16.1.4479499'
+
     defaultConfig {
         applicationId "com.example.app"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -38,7 +42,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
     // Stripe Android SDK
-    implementation 'com.stripe:stripe-android:17.2.0'
+    implementation 'com.stripe:stripe-android:20.2.0' // 17.2.0 -> 20.2.0
 
     // OkHttp & GSON
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'

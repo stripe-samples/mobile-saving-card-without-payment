@@ -96,4 +96,9 @@ $app->post('/webhook', function(Request $request, Response $response) {
     return $response->withJson([ 'status' => 'success' ])->withStatus(200);
 });
 
+(function () use ($container) {
+    $logger = $container->get('logger');
+    $logger->info('Web-App re-running.');
+})();
+
 $app->run();

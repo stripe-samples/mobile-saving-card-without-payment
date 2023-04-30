@@ -32,8 +32,7 @@ class CheckoutActivityKotlin : AppCompatActivity() {
      * After verifying the sample server is running locally, build and run the app using the
      * Android emulator.
      */
-    // 10.0.2.2 is the Android emulator's alias to localhost
-    private val backendUrl = "http://10.0.2.2:4242/"
+    private val backendUrl = Common.webApiUrl()
     private val httpClient = OkHttpClient()
     private lateinit var setupIntentClientSecret: String
 

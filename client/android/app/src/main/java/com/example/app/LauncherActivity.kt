@@ -13,14 +13,17 @@ import org.json.JSONObject
 import java.io.IOException
 
 class LauncherActivity : AppCompatActivity() {
-    // 10.0.2.2 is the Android emulator's alias to localhost
-    private val backendUrl = "http://10.0.2.2:4242/"
+    private val backendUrl = Common.webApiUrl()
     private val httpClient = OkHttpClient()
     private lateinit var publishableKey: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launcher)
+
+        if (Common.STRIPE_KEY.isNotEmpty()) {
+            PaymentConfiguration.init(this, Common.STRIPE_KEY)
+        }
         fetchPublishableKey()
 
         launch_checkout_kotlin.setOnClickListener {
@@ -50,8 +53,9 @@ class LauncherActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchPublishableKey() {
+    private fun fetchPublishableKey(retryCount: Int = 0) {
         // Create a SetupIntent by calling the sample server's /create-setup-intent endpoint.
+        val tag = "Web-API: fetch-key";
         val mediaType = "application/json; charset=utf-8".toMediaType()
         val body = "".toRequestBody(mediaType)
         val request = Request.Builder()
@@ -66,8 +70,15 @@ class LauncherActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
-                    displayAlert("Failed to load page", "Error: $response"
-                    )
+                    Common.logError(tag, "Failed to load page $response")
+                    // Maybe retry.
+                    if (retryCount < 3) {
+                        Common.handler.postDelayed({
+                            fetchPublishableKey(retryCount + 1)
+                        }, 1500)
+                        return
+                    }
+                    displayAlert("Failed to load page", "Error: $response")
                 } else {
                     val responseData = response.body?.string()
                     val responseJson =
@@ -76,8 +87,12 @@ class LauncherActivity : AppCompatActivity() {
                     // from the server.
                     publishableKey = responseJson.getString("publishableKey")
 
+                    Common.log(tag, "got response: $publishableKey")
+
                     // Set up PaymentConfiguration with your Stripe publishable key
-                    PaymentConfiguration.init(applicationContext, publishableKey)
+                    if (Common.STRIPE_KEY.isEmpty()) {
+                        PaymentConfiguration.init(applicationContext, publishableKey)
+                    }
                 }
             }
         })
