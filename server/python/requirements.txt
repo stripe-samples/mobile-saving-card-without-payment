@@ -6,7 +6,7 @@ idna==3.3
 itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
-python-dotenv==0.10.3
+python-dotenv==1.0.0
 requests==2.31.0
 stripe==4.1.0
 toml==0.9.6
