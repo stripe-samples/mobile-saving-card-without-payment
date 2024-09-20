@@ -40,8 +40,7 @@ public class CheckoutActivityJava extends AppCompatActivity {
      * After verifying the sample server is running locally, build and run the app using the
      * Android emulator.
      */
-    // 10.0.2.2 is the Android emulator's alias to localhost
-    private static final String backendUrl = "http://10.0.2.2:4242/";
+    private static final String backendUrl = Common.webApiUrl();
     private OkHttpClient httpClient = new OkHttpClient();
     private String setupIntentClientSecret;
     private PaymentLauncher paymentLauncher;
