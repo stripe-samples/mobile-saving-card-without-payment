@@ -1,3 +1,5 @@
+# This repo has been archived and is no longer maintained. It may be inaccurate and remains archived for historical reasons
+
 # Saving cards without payment on mobile (iOS & Android)
 
 This sample shows how to build a form to save a credit card without taking a payment using the [Setup Intents API](https://stripe.com/docs/api/setup_intents).
